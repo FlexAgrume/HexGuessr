@@ -8,3 +8,5 @@ This application was developed in :
 - CSS3
 
 *Loosely based on* [What the Hex?](http://yizzle.com/whatthehex/)
+
+![](./screenshot.png)
