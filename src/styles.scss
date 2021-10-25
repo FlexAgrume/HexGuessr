@@ -1,0 +1,247 @@
+@use 'sass:color';
+
+// Reset
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+    height: 100%;
+}
+
+// HexGuessr
+
+.hexguessr {
+    background-color: #fefefe;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    font-family: 'Open Sans', sans-serif;
+    padding: 0 1.5rem;
+}
+
+.hexguessr-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hexguessr-title {
+    margin: 4rem 0 4rem;
+    text-align: center;
+    font-weight: 400;
+    font-size: 1.8rem;
+    color: #050505;
+}
+
+@media only screen and (max-width: 500px) {
+    .hexguessr-title {
+        font-size: 1.5rem;
+    }
+}
+
+.hexguessr-question {
+    text-align: center;
+    font-weight: 300;
+    font-size: 3.4rem;
+
+    .hexguessr-hextoguess {
+        opacity: 1;
+        display: inline-block;
+        margin: 1rem 0 0;
+        font-weight: 500;
+        font-size: 5rem;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .hexguessr-question {
+        font-size: 2.6rem;
+
+        .hexguessr-hextoguess {
+            font-size: 3.5rem;
+        }
+    }
+}
+
+.hexguessr-list {
+    display: -ms-inline-grid;
+    display: inline-grid;
+    -ms-grid-columns: repeat(5, auto);
+    grid-template-columns: repeat(5, auto);
+    list-style: none;
+    text-align: center;
+    margin: 3rem 0 4rem;
+    opacity: 1;
+}
+
+.hexguessr-color {
+    position: relative;
+    background-color: #d5d5d5;
+    width: 8rem;
+    height: 8rem;
+    border-radius: 100%;
+    margin: 0.6rem;
+    cursor: pointer;
+    opacity: 1;
+    transition-property: opacity, transform;
+    transition-duration: .3s;
+    transition-timing-function: ease;
+
+    &::after {
+        position: absolute;
+        z-index: 0;
+        top: 0;
+        left: 0;
+        content: '';
+        width: 100%;
+        height: 100%;
+        border-radius: 100%;
+        background-color: inherit;
+        transition-property: transform, opacity, box-shadow;
+        transition-duration: .3s;
+        transition-timing-function: ease;
+        opacity: .5;
+    }
+    
+
+    &:hover {
+        &::after {
+            box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.2);
+            transform: scale(1.1);
+            opacity: 1;
+        }
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .hexguessr-color {
+        width: 5.4rem;
+        height: 5.4rem;
+    }
+}
+
+.hexguessr-result {
+    text-align: center;
+    font-weight: 300;
+    font-size: 2.6rem;
+    opacity: 1;
+    color: #050505;
+
+    .hexguessr-color-selected {
+        font-weight: 400;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .hexguessr-result {
+        font-size: 2rem;
+    }
+}
+
+.hexguessr-good-answer {
+    cursor: initial;
+    transform: scale(1.1);
+    transition: transform 0s;
+    
+    &:hover {
+        &::after {
+            transform: none;
+            box-shadow: none;
+        }
+    }
+
+    &::after {
+        animation: pulse 1.3s;
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(.9);
+        opacity: .5;
+    }
+
+    70% {
+        transform: scale(1.2);
+        box-shadow: 0 0 0 3rem currentColor;
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 currentColor;
+        opacity: 0;
+    }
+}
+
+// CSS-Tricks - “Shake” CSS Keyframe Animation by Sarah Drasner
+// Source : https://css-tricks.com/snippets/css/shake-css-keyframe-animation/
+
+.hexguessr-wrong-answer {
+    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+    transform: translate3d(0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+@keyframes shake {
+    10%, 90% {
+        transform: translate3d(-1px, 0, 0);
+    }
+
+    20%, 80% {
+        transform: translate3d(2px, 0, 0);
+    }
+
+    30%, 50%, 70% {
+        transform: translate3d(-4px, 0, 0);
+    }
+
+    40%, 60% {
+        transform: translate3d(4px, 0, 0);
+    }
+}
+
+.hexguessr-newgame {
+    position: relative;
+    display: block;
+    margin: 3rem auto 0;
+    padding: 1rem 2.4rem;
+    border-radius: 5px;
+    background-color: #d5d5d5;
+    text-transform: uppercase;
+    font-size: 2.4rem;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    border: 0;
+    outline: none;
+    cursor: pointer;
+    box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+        7px 7px 20px 0px rgba(0,0,0,.1),
+        4px 4px 5px 0px rgba(0,0,0,.1);
+
+    &:active {
+        top: 2px;
+    }
+}
+
+// For JavaScript
+
+.hidden {
+    opacity: 0!important;
+    transition: all .3s ease;
+
+    &:hover {
+        opacity: 0;
+        cursor: initial;
+    }
+}
