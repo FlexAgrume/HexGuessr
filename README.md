@@ -6,7 +6,7 @@
 ## Links
 
 - Solution URL: [Github](https://github.com/FlexAgrume/HexGuessr)
-- Live Site URL: [Vercel](https://hex-guessr-ex09qxhe1-flexagrume.vercel.app/)
+- Live Site URL: [HexGuessr](https://hex-guessr-ex09qxhe1-flexagrume.vercel.app/)
 
 ## Built with
 
